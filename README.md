@@ -5,3 +5,7 @@ https://raw.githubusercontent.com/kamrankhorasani/My-Utilities/main/revoke-openv
 Install BBR
 
 https://raw.githubusercontent.com/kamrankhorasani/My-Utilities/main/bbr.sh
+
+UFW rules
+
+https://raw.githubusercontent.com/kamrankhorasani/My-Utilities/main/setUFWrules.sh
