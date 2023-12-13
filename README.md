@@ -13,3 +13,7 @@ https://raw.githubusercontent.com/kamrankhorasani/My-Utilities/main/setUFWrules.
 OpenVPN Script
 
 curl -O https://raw.githubusercontent.com/angristan/openvpn-install/master/openvpn-install.sh
+
+OpenVPN BackUp Script
+
+https://raw.githubusercontent.com/kamrankhorasani/My-Utilities/main/backupUsers.sh
