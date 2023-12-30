@@ -17,3 +17,7 @@ curl -O https://raw.githubusercontent.com/angristan/openvpn-install/master/openv
 OpenVPN BackUp Script
 
 https://raw.githubusercontent.com/kamrankhorasani/My-Utilities/main/backupUsers.sh
+
+Update Ubuntu Server script
+
+https://raw.githubusercontent.com/kamrankhorasani/My-Utilities/main/update.sh
