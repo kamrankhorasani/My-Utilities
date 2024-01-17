@@ -25,3 +25,7 @@ https://raw.githubusercontent.com/kamrankhorasani/My-Utilities/main/update.sh
 Download SpeedTest
 
 https://kamrankhorasani.s3.ir-thr-at1.arvanstorage.ir/speedtest_1.2.0.84-1.ea6b6773cf_amd64.deb
+
+Download My bench script 
+
+https://raw.githubusercontent.com/kamrankhorasani/My-Utilities/main/bench.sh
