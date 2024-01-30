@@ -29,3 +29,7 @@ https://kamrankhorasani.s3.ir-thr-at1.arvanstorage.ir/speedtest_1.2.0.84-1.ea6b6
 Download My bench script 
 
 https://raw.githubusercontent.com/kamrankhorasani/My-Utilities/main/bench.sh
+
+fake IP
+
+apt install curl -y && bash <(curl -Ls https://raw.githubusercontent.com/Azumi67/PrivateIP_TCP-UDP_Tunnel/main/Private.sh --ipv4)
