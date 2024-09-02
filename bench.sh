@@ -80,6 +80,7 @@ speed() {
     speed_test '47786' 'Webseiten, DE'
     speed_test '24215' 'Paris, FR'
     speed_test '28922' 'Amsterdam, NL'
+    speed_test '34663' 'Tehran, IR'
     speed_test '22669' 'Elisa, FI'
     speed_test '14928' 'Telia, FI'
     speed_test '31122' 'RETN, FI'
