@@ -33,3 +33,5 @@ https://raw.githubusercontent.com/kamrankhorasani/My-Utilities/main/bench.sh
 fake IP
 
 apt install curl -y && bash <(curl -Ls https://raw.githubusercontent.com/Azumi67/PrivateIP_TCP-UDP_Tunnel/main/Private.sh --ipv4)
+
+bash <(curl -Ls https://raw.githubusercontent.com/kamrankhorasani/isatap-tunnel/master/main.sh)
