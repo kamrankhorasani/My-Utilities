@@ -34,4 +34,14 @@ fake IP
 
 apt install curl -y && bash <(curl -Ls https://raw.githubusercontent.com/Azumi67/PrivateIP_TCP-UDP_Tunnel/main/Private.sh --ipv4)
 
-bash <(curl -Ls https://raw.githubusercontent.com/kamrankhorasani/isatap-tunnel/master/main.sh)
+New Azumi:
+
+pre installl:
+
+apt install python3 -y && sudo apt install python3-pip &&  pip install colorama && pip install netifaces && apt install curl -y
+pip3 install colorama
+sudo apt-get install python-pip -y  &&  apt-get install python3 -y && alias python=python3 && python -m pip install colorama && python -m pip install netifaces
+
+script:
+
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/Azumi67/6TO4-GRE-IPIP-SIT/main/lightweight.sh)"
