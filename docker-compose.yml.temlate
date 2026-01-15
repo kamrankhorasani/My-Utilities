@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  rocketchat:
+    image: rocket.chat:${RC_VERSION:-latest}
+    restart: always
+    command: >
+      bash -c "for i in `seq 1 30`; do
+        node main.js &&
+        s=$$? && break || s=$$?;
+        echo \"Tried $$i times. Waiting 5 secs...\";
+        sleep 5;
+      done; (exit $$s)"
+    environment:
+      - MONGO_URL=mongodb://mongodb:27017/rocketchat?replicaSet=rs0
+      - MONGO_OPLOG_URL=mongodb://mongodb:27017/local?replicaSet=rs0
+      - ROOT_URL=https://${DOMAIN}
+      - PORT=3000
+      - DEPLOY_METHOD=docker
+      - ACCOUNTS_AVATAR_STORE_TYPE=GridFS
+      - FILE_UPLOAD_FILESYSTEM_PATH=/app/uploads
+    volumes:
+      - ./data/uploads:/app/uploads
+    depends_on:
+      - mongodb
+      - mongo-init-replica
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.rocketchat.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.rocketchat.entrypoints=websecure"
+      - "traefik.http.routers.rocketchat.tls.certresolver=myresolver"
+
+  mongodb:
+    image: mongo:8.2
+    restart: always
+    user: root
+    command: ["mongod", "--replSet", "rs0", "--oplogSize", "128", "--bind_ip_all"]
+    volumes:
+      - ./data/mongodb:/data/db
+
+  mongo-init-replica:
+    image: mongo:8.2
+    restart: "no"
+    command: >
+      bash -c "for i in `seq 1 30`; do
+        mongo --host mongodb --eval 'rs.initiate({ _id: \"rs0\", members: [ { _id: 0, host: \"mongodb:27017\" } ] })' &&
+        s=$$? && break || s=$$?;
+        echo \"Tried $$i times. Waiting 5 secs...\";
+        sleep 5;
+      done; (exit $$s)"
+    depends_on:
+      - mongodb
+
+  traefik:
+    image: traefik:v2.11
+    restart: always
+    command:
+      - "--api.insecure=false"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge=true"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.myresolver.acme.email=${LETSENCRYPT_EMAIL}"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./data/certs:/letsencrypt"
+    environment:
+      - DOCKER_API_VERSION=1.44
